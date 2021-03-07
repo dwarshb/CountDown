@@ -15,11 +15,8 @@ class TimerActivity : AppCompatActivity() {
     @ExperimentalTime
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        var count = ""
-        if (intent.hasExtra("count"))
-            count = intent.getStringExtra("count")!!
         setContent {
-            TimerScreen(count)
+            TimerScreen(baseContext)
         }
     }
 }
