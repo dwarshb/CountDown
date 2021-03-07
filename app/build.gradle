@@ -40,6 +40,23 @@ android {
     }
 }
 
+apply plugin: 'com.diffplug.spotless'
+spotless {
+    ratchetFrom 'origin/master'
+    kotlin {
+        target project.fileTree(dir: 'src', include: '**/*.kt')
+        trimTrailingWhitespace()
+        ktlint(ktlintVersion)
+        licenseHeaderFile rootProject.file('spotless/copyright.kt')
+    }
+    groovyGradle {
+        target '*.gradle'
+        greclipse().configFile(rootProject.file('gradle/formatter.properties'))
+        endWithNewline()
+        paddedCell() // recommended hack to keep gradle files tidy
+    }
+}
+
 dependencies {
 
     implementation 'androidx.core:core-ktx:1.3.2'
